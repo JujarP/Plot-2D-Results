@@ -63,6 +63,13 @@ for subdir, dirs, files in os.walk(curDir):                             #Loop th
             xy_duz = data["duz"].values                                 #Assign variable name
 
 ################################################
+################CLIP THE DATA###################
+################################################
+
+            xy_uz[xy_uz>0.6] = 0.6                                      #Used to set the upper and lower bounds
+            xy_uz[xy_uz<0] = 0                                          #Used to set the upper and lower bounds
+
+################################################
 ################REORDER THE DATA################
 ################################################
 
@@ -87,6 +94,10 @@ for subdir, dirs, files in os.walk(curDir):                             #Loop th
 ##################################################
 ################GRAPHING OPTIONS##################
 ##################################################
+            
+            gridx=list(extentx)                                         #List of grid points in x (regular or irregular spaced)
+            gridy=list(extenty)                                         #List of grid points in y (regular or irregular spaced)
+            newX,newY=np.meshgrid(gridx,gridy)                          #Create the meshgrid
 
             fig, ax = plt.subplots(1, 1, figsize=(7, 7))                #Creates figure for plotting
             asratio = x.max()/y.max()                                   #Aspect ratio for plots
@@ -95,8 +106,8 @@ for subdir, dirs, files in os.walk(curDir):                             #Loop th
             ax.set_xlabel(r'$x$', fontsize=16)                          #x label
             ax.set_ylabel(r'$y$', fontsize=16)                          #y label
 
-            plt.imshow(var, aspect=asratio, origin='lower',             #Display contour image
-            interpolation='bicubic', extent = (-1,1,-1,1))
+            plt.contourf(newX,newY,var, 100, origin='lower',
+                         extent = (-1,1,-1,1))                          #Display contour image
 
             divider = make_axes_locatable(ax)                           #Allows colorbar to be modifiable
             cax = divider.append_axes("right", size="6%", pad=0.2)      #Parmaters for colorbar
