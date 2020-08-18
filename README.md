@@ -61,6 +61,17 @@ The main user inputs are:
 ################GRAPHING OPTIONS##################
 ##################################################
 ```
+## Example Files
+
+Included are example results files:
+* Sample_Results_File_SOL_xy_.0000.plt
+* ...
+* Sample_Results_File_SOL_xy_SOL_xy_12.0000.plt
+
+The file names are time stamped (as is commonly the case when writing transient results files). The Python script reads the time stamp and uses it as the output for the saved image files. Example output files are therefore:
+* 0.png
+* ...
+* 15.png
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
